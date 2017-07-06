@@ -22,6 +22,10 @@ export class NavbarComponent implements OnInit {
 
     provider.addScope('https://www.googleapis.com/auth/plus.login');
 
+    provider.setCustomParameters({
+    'login_hint': 'zsagia@gmail.com'
+  });
+
     firebase.auth().signInWithPopup(provider).then(function(authData) {
       console.log(authData);
     }).catch(function(error) {
