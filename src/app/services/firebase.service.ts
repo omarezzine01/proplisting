@@ -1,16 +1,24 @@
 import { Injectable } from '@angular/core';
 import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
+import { AngularFireAuth } from 'angularfire2/auth';
 
+import { Observable } from 'rxjs/Observable';
+import * as firebase from 'firebase/app';
 
 @Injectable()
 export class FirebaseService {
+  user: Observable<firebase.User>;
+  listings: FirebaseListObservable<any[]>;
 
-    listings: FirebaseListObservable<any[]>;
+  constructor(
+    private db: AngularFireDatabase,
+    private afAuth: AngularFireAuth) {
+       this.user = afAuth.authState;
+  }
 
-  constructor(private af: AngularFireDatabase) { }
+  getListings() {
+    this.listings = this.db.list('/listings');
 
-  getListings(){
-    this.listings=this.af.list('/listings') as FirebaseListObservable <Listing>
     return this.listings;
   }
 }

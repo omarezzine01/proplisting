@@ -1,10 +1,10 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import {RouterModule, Routes} from '@angular/router';
-import { AngularFireModule,} from 'angularfire2';
-import {AngularFireAuth,} from 'angularfire2/auth';
-import { AngularFireDatabaseModule } from 'angularfire2/database';
-import {FirebaseService} from './services/firebase.service';
+import { RouterModule, Routes } from '@angular/router';
+import { AngularFireModule } from 'angularfire2';
+import { AngularFireAuthModule, AngularFireAuth } from 'angularfire2/auth';
+import { AngularFireDatabaseModule, AngularFireDatabase } from 'angularfire2/database';
+import { FirebaseService } from './services/firebase.service';
 import * as firebase from 'firebase/app';
 
 
@@ -30,16 +30,13 @@ export const environment = {
 
 const firebaseAuthConfig = {
   provider: new firebase.auth.GoogleAuthProvider(),
-  method: AngularFireAuth,
-
+  method: AngularFireAuth
 }
 
-
-const appRoutes : Routes = [
-  {path:'', component: HomeComponent},
-  {path:'listings', component: ListingsComponent},
-  {path: 'add-listing', component: AddListingComponent}, 
-
+const appRoutes: Routes = [
+  { path: '', component: HomeComponent },
+  { path: 'listings', component: ListingsComponent },
+  { path: 'add-listing', component: AddListingComponent }
 ]
 
 @NgModule({
@@ -56,6 +53,7 @@ const appRoutes : Routes = [
     BrowserModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireDatabaseModule,
+    AngularFireAuthModule,
     RouterModule.forRoot(appRoutes)
   ],
   providers: [FirebaseService, AngularFireAuth],
