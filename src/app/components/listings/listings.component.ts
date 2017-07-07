@@ -9,6 +9,7 @@ import {FirebaseService} from '../../services/firebase.service'
 export class ListingsComponent implements OnInit {
 
   listings:any;
+
   constructor(private firebaseService: FirebaseService) { }
 
   ngOnInit() {
