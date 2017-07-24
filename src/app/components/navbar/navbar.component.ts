@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import{AsyncPipe} from '@angular/common';
+import {Router} from '@angular/router'
 import { AngularFireAuth } from 'angularfire2/auth';
 import { AngularFireModule } from 'angularfire2';
+import {FlashMessagesService} from 'angular2-flash-messages';
+
 
 import * as firebase from 'firebase/app';
 
@@ -13,7 +16,11 @@ import * as firebase from 'firebase/app';
 export class NavbarComponent implements OnInit {
   loggedin:boolean = false;
 
-  constructor(public afAuth: AngularFireAuth) {
+  constructor(
+    public afAuth: AngularFireAuth,
+    public flashMessage: FlashMessagesService,
+    private router:Router,
+    ) {
   }
 
   ngOnInit() {
@@ -22,27 +29,30 @@ export class NavbarComponent implements OnInit {
   login() {
     var provider = new firebase.auth.GoogleAuthProvider();
 
-    //provider.addScope('https://www.googleapis.com/auth/plus.login');
-
-    /*provider.setCustomParameters({
-    'login_hint': 'omarezzine39@gmail.com'
-  });*/
+    provider.addScope('https://www.googleapis.com/auth/plus.login');
 
     firebase.auth().signInWithPopup(provider).then(function(authData) {
       console.log(authData);
-      console.log('you are in');
+
     }).catch(function(error) {
       console.log(error);
     });
 
     this.loggedin = true;
+    
 
   }
 
   logout(){
     firebase.auth().signOut();
+
+    this.flashMessage.show('You are logged out', 
+    {cssClass:'alert-danger', timeout:3000});
+
     this.loggedin = false;
     console.log('you are out');  
+    this.router.navigate(['/']);
+
   }
 
 }

@@ -1,0 +1,16 @@
+
+<!--<ul class="list-group">
+    <li class="list-group-item" *ngFor="let listing of listings">
+        
+        <button type="button" class="btn btn-info "
+            [routerLink]="['/listing/'+listing.$key]">{{listing.title}}
+        </button>
+    </li>
+</ul>-->
+    <md-card-actions>
+        <md-grid-tile [style.border-right]="'1px solid #ddd'" class="list-group-item" *ngFor="let listing of listings">
+            <button  md-raised-button class="center" color="accent"  [routerLink]="['/listing/'+listing.$key]">
+                {{listing.title}}
+            </button>
+        </md-grid-tile>
+    </md-card-actions>

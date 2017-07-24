@@ -1,3 +1,42 @@
-<p>
-  add-listing works!
-</p>
+<button md-fab color="accent" class="col-xs-4 col-sm-4 col-md-4 col-lg-4" [routerLink]="['/listings']">
+  <i class="material-icons ">arrow_back</i>
+</button>
+
+<h2 class="page-header">
+  Add a listing
+</h2>
+
+<form id="add-listing">
+
+  <md-input-container class="form-group col-xs-6 col-sm-6 col-md-6 col-lg-6"> 
+    <input mdInput type="text" [(ngModel)]="title" name="title" placeholder="Title" required>
+  </md-input-container>
+
+  <md-input-container class="form-group col-xs-6 col-sm-6 col-md-6 col-lg-6">
+    <input mdInput type="text" [(ngModel)]="city" name="city"  placeholder="City" required>
+  </md-input-container>
+  
+  <md-input-container class="form-group col-xs-6 col-sm-6 col-md-6 col-lg-6">
+    <input mdInput type="text" [(ngModel)]="owner" name="owner" placeholder="Owner"  required>
+  </md-input-container>
+  
+  <md-input-container class="form-group col-xs-6 col-sm-6 col-md-6 col-lg-6">
+    <input mdInput type="text" [(ngModel)]="bedrooms" name="bedrooms" placeholder="Bedrooms" required>
+  </md-input-container>
+  
+  <md-select type="text"  [(ngModel)]="type" name="type" placeholder="Type"  class="form-group col-xs-6 col-sm-6 col-md-6 col-lg-6" required>
+      <md-option [value]="Estate">Estate</md-option>
+      <md-option [value]="Condo">Condo</md-option>
+  </md-select>
+
+   <md-input-container class="form-group col-xs-6 col-sm-6 col-md-6 col-lg-6">
+    <input mdInput type="text" [(ngModel)]="price" name="price" placeholder="Price" required>
+  </md-input-container>
+  
+  <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-12">
+    <label>Image</label>
+    <input type="file" [(ngModel)]="image" name="image" id="image" (click)="ngSelectFile()">
+    <br>
+  </div>
+  
+  <button md-raised-button type="submit" (click)="onAddSubmit()" color="accent" class="btn btn-success btn-block" >Submit</button>

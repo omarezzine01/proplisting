@@ -1,5 +1,5 @@
 
- <nav class="navbar navbar-inverse ">
+<!--> <nav class="navbar navbar-inverse ">
       <div class="container">
         <div class="navbar-header">
           <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
@@ -8,19 +8,71 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="#">PropListings</a>
+          <a class="navbar-brand header" [routerLink]="['/']">PropListings</a>
         </div>
         <div id="navbar" class="collapse navbar-collapse">
-          <ul class="nav navbar-nav navbar-left">
-            <li><a [routerLink]="['/']"> Home </a></li>
-            <li *ngIf="(loggedin)"><a [routerLink]="['/listings']"> Listings </a></li>
-            <li *ngIf="(loggedin)"><a [routerLink]="['/add-listing']"> Add Listings </a></li>
+          <ul class="nav navbar-nav navbar-left" >
+            <li><a [routerLink]="['/']" class= "button" routerLinkActive="active"> Home </a></li>
+            <li *ngIf="(loggedin)"><a [routerLink]="['/listings']" class="btn" routerLinkActive="active"> Listings </a></li>
+            <li *ngIf="(loggedin)"><a [routerLink]="['/add-listing']" class="btn" routerLinkActive="active"> Add Listings </a></li>
 
           </ul>
           <ul class="nav navbar-nav navbar-right">
-            <li><a *ngIf="!(loggedin)" (click) = "login()"> Login </a></li>
-            <li><a  *ngIf="(loggedin)" (click) = "logout()"> Logout </a></li>
+            <li><a *ngIf="!(loggedin)" (click) = "login()" class="btn"> Login </a></li>
+            <li><a  *ngIf="(loggedin)" (click) = "logout()" class="btn"> Logout </a></li>
           </ul>
-        </div><!--/.nav-collapse -->
+        </div>
       </div>
-    </nav>
+    </nav></!-->
+
+
+    <md-toolbar color="primary">
+      <span class="navbar-brand">PropListings</span>
+
+      <button md-button [routerLink]="['/']" >
+        <i class="material-icons">home</i>
+        Home
+      </button>
+
+      <button md-button  *ngIf="(loggedin)" [routerLink]="['/listings']">
+        <i class="material-icons">menu</i>
+        Listings
+      </button>
+
+      <button md-button  *ngIf="(loggedin)" [routerLink]="['/add-listing']">
+        <i class="material-icons">fiber_new</i>
+        Add Listings
+      </button>
+
+      <button md-button *ngIf="!(loggedin)" [routerLink]="['/']" (click)="login()">
+        <i class="material-icons">account_circle</i>
+        Login</button>
+
+      <button md-button *ngIf="(loggedin)" [routerLink]="['/']" (click)="logout()">
+        <i class="material-icons">exit_to_app</i>
+        Logout</button>
+
+    </md-toolbar>
+
+    <md-menu #appMenu="mdMenu">
+      <button md-menu-item> Settings </button>
+      <button md-menu-item> Help </button>
+    </md-menu>
+
+    <md-card  *ngFor="let data of (myData ? myData.slice(0,10): []); let i = index">
+      <img md-card-image class="example-header-image" src="{{data.url}}">
+      <md-card-header>
+        <md-card-title>{{data.title}}</md-card-title>
+      </md-card-header>
+
+      <md-card-actions>
+        <button md-button>
+          <md-icon class="example-icon">favorite</md-icon>
+        </button>
+        <button md-button>
+          <md-icon class="example-icon">share</md-icon>
+        </button>
+      </md-card-actions>
+
+    </md-card>
+  
